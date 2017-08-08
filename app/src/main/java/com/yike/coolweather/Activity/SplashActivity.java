@@ -31,14 +31,14 @@ public class SplashActivity extends AppCompatActivity {
         rlRoot.startAnimation(anim);
 
         //2秒之后跳转主页面
-        new Handler(){
+        (new Handler(){
             @Override
             public void handleMessage(Message msg) {
                // super.handleMessage(msg);
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 finish();
             }
-        }.sendEmptyMessageAtTime(0,2000);
+        }).sendEmptyMessageAtTime(0,2000);
 
 
 
