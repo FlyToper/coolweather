@@ -2,6 +2,8 @@ package com.yike.coolweather.Util;
 
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
+import com.yike.coolweather.Gson.Weather;
 import com.yike.coolweather.JavaBean.City;
 import com.yike.coolweather.JavaBean.County;
 import com.yike.coolweather.JavaBean.Province;
@@ -101,4 +103,22 @@ public class Utility {
 
     }
 
+    /**
+     * 将返回的JSON数据解析成Weather实体类
+     *
+     * @param response
+     * @return
+     */
+    public static Weather handleWeatherResponse(String response){
+        try{
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather5");
+            String weatherContent = jsonArray.getJSONObject(0).toString();
+
+            return new Gson().fromJson(weatherContent, Weather.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
